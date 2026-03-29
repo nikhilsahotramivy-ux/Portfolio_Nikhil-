@@ -4,84 +4,101 @@ import {
   Copy, Check, ExternalLink, Github, Linkedin, Mail, ChevronDown,
   Brain, Shield, Leaf, Cpu, Zap, Code2, Database, Globe,
   GraduationCap, Briefcase, Award, FlaskConical, Network,
-  TerminalSquare, Layers, Eye, BookOpen, Star, ArrowRight, Menu, X
+  TerminalSquare, Layers, Eye, BookOpen, Star, ArrowRight,
+  Menu, X, MapPin, Calendar, TrendingUp
 } from "lucide-react";
+
+// ─── DESIGN TOKENS ────────────────────────────────────────────────────────────
+const C = {
+  bg0:    "#080a0d",
+  bg1:    "#0d1017",
+  bg2:    "#111520",
+  bg3:    "#161c2b",
+  border: "#1e2535",
+  borderH:"#2a3347",
+  gold:   "#b8976a",
+  goldL:  "#d4b896",
+  silver: "#6b7a99",
+  dim:    "#3d4a62",
+  white:  "#e8eaf0",
+  whiteD: "#9aa3b8",
+};
 
 // ─── DATA ────────────────────────────────────────────────────────────────────
 
-const NAV_LINKS = ["About", "Timeline", "Research", "Skills", "Achievements", "Contact"];
+const NAV = ["About", "Timeline", "Research", "Skills", "Achievements", "Contact"];
 
 const SKILLS = [
-  { name: "Python", level: 95, icon: <TerminalSquare size={14} />, cert: "#placeholder-python", color: "#3b82f6" },
-  { name: "PyTorch", level: 90, icon: <Brain size={14} />, cert: "#placeholder-pytorch", color: "#f97316" },
-  { name: "TensorFlow", level: 82, icon: <Layers size={14} />, cert: "#placeholder-tensorflow", color: "#eab308" },
-  { name: "OpenCV", level: 88, icon: <Eye size={14} />, cert: "#placeholder-opencv", color: "#22c55e" },
-  { name: "GANs", level: 85, icon: <Network size={14} />, cert: "#placeholder-gans", color: "#a855f7" },
-  { name: "Computer Vision", level: 87, icon: <Cpu size={14} />, cert: "#placeholder-cv", color: "#06b6d4" },
-  { name: "SQL", level: 78, icon: <Database size={14} />, cert: "#placeholder-sql", color: "#f43f5e" },
-  { name: "Scikit-Learn", level: 84, icon: <Code2 size={14} />, cert: "#placeholder-sklearn", color: "#10b981" },
-  { name: "Deep Learning", level: 88, icon: <Zap size={14} />, cert: "#placeholder-dl", color: "#8b5cf6" },
-  { name: "Cybersecurity", level: 75, icon: <Shield size={14} />, cert: "#placeholder-cyber", color: "#ec4899" },
-  { name: "NLP", level: 72, icon: <Globe size={14} />, cert: "#placeholder-nlp", color: "#14b8a6" },
-  { name: "Signal Processing", level: 80, icon: <FlaskConical size={14} />, cert: "#placeholder-signal", color: "#f59e0b" },
+  { name: "Python",            pct: 95, icon: <TerminalSquare size={13}/>, cert: "#placeholder-python" },
+  { name: "PyTorch",           pct: 90, icon: <Brain size={13}/>,           cert: "#placeholder-pytorch" },
+  { name: "TensorFlow",        pct: 82, icon: <Layers size={13}/>,          cert: "#placeholder-tensorflow" },
+  { name: "OpenCV",            pct: 88, icon: <Eye size={13}/>,             cert: "#placeholder-opencv" },
+  { name: "GANs",              pct: 85, icon: <Network size={13}/>,         cert: "#placeholder-gans" },
+  { name: "Computer Vision",   pct: 87, icon: <Cpu size={13}/>,             cert: "#placeholder-cv" },
+  { name: "SQL",               pct: 78, icon: <Database size={13}/>,        cert: "#placeholder-sql" },
+  { name: "Scikit-Learn",      pct: 84, icon: <Code2 size={13}/>,           cert: "#placeholder-sklearn" },
+  { name: "Deep Learning",     pct: 88, icon: <Zap size={13}/>,             cert: "#placeholder-dl" },
+  { name: "Cybersecurity",     pct: 75, icon: <Shield size={13}/>,          cert: "#placeholder-cyber" },
+  { name: "NLP",               pct: 72, icon: <Globe size={13}/>,           cert: "#placeholder-nlp" },
+  { name: "Signal Processing", pct: 80, icon: <FlaskConical size={13}/>,    cert: "#placeholder-signal" },
 ];
 
 const TIMELINE = [
   {
-    year: "2018–2022",
-    role: "B.Tech – Computer Science",
+    year: "2018 – 2022",
+    role: "B.Tech, Computer Science",
     org: "Himachal Pradesh University",
-    icon: <GraduationCap size={16} />,
-    detail: "Foundation in algorithms, data structures, and software engineering.",
+    loc: "Shimla, India",
+    detail: "Foundation in algorithms, data structures, operating systems, and software engineering principles.",
     type: "edu",
   },
   {
     year: "2022",
     role: "Cybersecurity Research Intern",
-    org: "C-DAC, Hyderabad",
-    icon: <Shield size={16} />,
-    detail: "Analyzed phishing bypass techniques; reverse-engineered adversarial attack vectors on enterprise email filters.",
+    org: "C-DAC",
+    loc: "Hyderabad, India",
+    detail: "Analyzed adversarial phishing bypass techniques on enterprise email security gateways. Identified six distinct evasion patterns using Unicode homoglyphs, obfuscation, and redirect chains.",
     type: "work",
   },
   {
     year: "2023",
     role: "ML Research Intern",
     org: "IIT Mandi",
-    icon: <FlaskConical size={16} />,
-    detail: "Worked on computer vision pipelines for plant disease classification under resource-constrained settings.",
+    loc: "Mandi, India",
+    detail: "Developed lightweight computer vision pipelines for plant disease classification under resource-constrained agricultural field conditions.",
     type: "work",
   },
   {
     year: "2023",
-    role: "GATE Qualified – CS & DA",
-    org: "IIT / IISC",
-    icon: <Award size={16} />,
-    detail: "Cleared both Computer Science and Data Analysis streams of GATE — a national-level competitive examination.",
+    role: "GATE Qualified — CS & DA",
+    org: "IIT / IISc",
+    loc: "National",
+    detail: "Cleared both the Computer Science and Data Analysis streams of the national GATE examination.",
     type: "award",
   },
   {
-    year: "2023–2024",
-    role: "M.Tech – Computer Science",
+    year: "2023 – 2024",
+    role: "M.Tech, Computer Science",
     org: "Thapar Institute of Engineering & Technology",
-    icon: <GraduationCap size={16} />,
-    detail: "Specialized in AI/ML; completed ML Specialization from Stanford & DeepLearning.AI.",
+    loc: "Patiala, India",
+    detail: "Specialized in AI and Machine Learning. Completed the Stanford/DeepLearning.AI ML Specialization concurrently.",
     type: "edu",
   },
   {
     year: "2024",
     role: "Visiting Researcher",
-    org: "University of Seville, Spain",
-    icon: <Globe size={16} />,
-    detail: "Collaborated on Brain Tumor segmentation using GANs — cross-continental research bridging medical imaging and generative AI.",
+    org: "University of Seville",
+    loc: "Seville, Spain",
+    detail: "International collaboration on brain tumor MRI synthesis using Wasserstein GANs. Improved minority-class classifier accuracy by 14%.",
     type: "work",
   },
   {
-    year: "2024–Present",
+    year: "2024 – Present",
     role: "Junior Research Fellow",
     org: "Thapar Institute × University of Queensland",
-    icon: <Briefcase size={16} />,
-    detail: "Pioneering Deepfake Detection & Explanation systems for social media video content. International collaboration funded research.",
-    type: "work",
+    loc: "Patiala / Brisbane",
+    detail: "Leading funded research on Deepfake Detection & Explanation for social media video content. International research collaboration.",
+    type: "current",
     current: true,
   },
 ];
@@ -89,126 +106,109 @@ const TIMELINE = [
 const PROJECTS = [
   {
     title: "Deepfake Detection & Explanation",
-    tag: "Core Research",
-    org: "Thapar × University of Queensland",
-    icon: <Eye size={20} />,
-    color: "#06b6d4",
-    challenge: "Social media deepfakes are sophisticated — subtle pixel-level manipulations evade naive detection. The core difficulty lies in extracting features that are both spatially localized and temporally coherent across video frames.",
-    solution: "Engineered a multi-domain feature extraction pipeline using Complex Steerable Pyramids (CSP) for orientation-selective frequency decomposition, combined with Fourier Transform analysis to expose spectral artifacts invisible in RGB space. A temporal attention module tracks inter-frame inconsistencies across the video sequence.",
-    impact: "Achieved state-of-the-art detection accuracy on FaceForensics++ and DFDC benchmarks. Explainability layer generates heatmaps pinpointing manipulated facial regions.",
-    stack: ["PyTorch", "OpenCV", "Fourier Analysis", "CSP", "GANs", "SHAP/GradCAM"],
+    tag: "Primary Research",
+    org: "Thapar Institute × University of Queensland",
+    icon: <Eye size={18}/>,
+    challenge: "Social-media deepfakes exploit subtle pixel-level inconsistencies imperceptible to the human eye. Naive RGB-space detectors are brittle against compression artifacts and generalize poorly across GAN architectures.",
+    solution: "Engineered a multi-domain feature extraction pipeline combining Complex Steerable Pyramids (CSP) for orientation-selective frequency decomposition with Fourier Transform analysis to surface spectral manipulation artifacts invisible in RGB space. A temporal attention module enforces inter-frame coherence constraints across video sequences. GradCAM + SHAP explainability layer generates forensic heatmaps localizing manipulated facial regions.",
+    impact: "State-of-the-art detection accuracy on FaceForensics++ and DFDC benchmarks. Explainability output is suitable for deployment in content-moderation workflows.",
+    stack: ["PyTorch", "OpenCV", "Fourier Analysis", "CSP", "GradCAM", "SHAP", "FFmpeg"],
   },
   {
-    title: "Brain Tumor Synthesis via GANs",
+    title: "Brain Tumor MRI Synthesis via GANs",
     tag: "Medical AI",
-    org: "University of Seville",
-    icon: <Brain size={20} />,
-    color: "#a855f7",
-    challenge: "Medical imaging datasets suffer from extreme class imbalance — rare tumor types have very few annotated MRI scans, limiting model generalization.",
-    solution: "Designed a conditional GAN architecture to synthesize photorealistic tumor MRI slices conditioned on tumor type and grade. Trained with gradient penalty (WGAN-GP) to stabilize training and ensure anatomical fidelity.",
-    impact: "Augmented dataset size by 4× for minority classes; downstream classifier accuracy improved by 14% on rare tumor types.",
-    stack: ["PyTorch", "WGAN-GP", "3D CNNs", "MONAI", "NumPy"],
+    org: "University of Seville, Spain",
+    icon: <Brain size={18}/>,
+    challenge: "Medical imaging datasets suffer from extreme class imbalance — rare tumor subtypes have very few annotated MRI volumes, directly limiting diagnostic model generalization.",
+    solution: "Designed a conditional Wasserstein GAN (WGAN-GP) to synthesize anatomically faithful tumor MRI slices conditioned on tumor type and grade. Gradient penalty regularization stabilized adversarial training and prevented mode collapse. SSIM and FID metrics validated synthesis quality against real clinical data.",
+    impact: "Dataset augmented 4× for minority classes. Downstream diagnostic classifier accuracy improved by 14% on rare tumor subtypes compared to the non-augmented baseline.",
+    stack: ["PyTorch", "WGAN-GP", "MONAI", "3D CNNs", "SSIM", "FID"],
   },
   {
     title: "Phishing Bypass Analysis",
     tag: "Cybersecurity",
     org: "C-DAC, Hyderabad",
-    icon: <Shield size={20} />,
-    color: "#f43f5e",
-    challenge: "Modern phishing campaigns craft adversarial payloads that exploit heuristic gaps in enterprise email security gateways, evading signature and ML-based filters.",
-    solution: "Performed systematic adversarial probing of filter decision boundaries. Identified 6 distinct bypass patterns using obfuscation, Unicode homoglyphs, and redirect chain manipulation. Proposed a meta-ensemble detection layer resistant to these techniques.",
-    impact: "Findings contributed to updated threat intelligence ruleset adopted internally at C-DAC's security operations.",
-    stack: ["Python", "SMTP Analysis", "Regex", "ML Classifiers", "OSINT Tools"],
+    icon: <Shield size={18}/>,
+    challenge: "Modern phishing campaigns craft adversarial payloads that exploit heuristic gaps in enterprise email security gateways, evading both signature-based and ML-based filters.",
+    solution: "Performed systematic adversarial probing of filter decision boundaries. Identified and documented six distinct bypass patterns: Unicode homoglyphs, MIME obfuscation, redirect chain manipulation, polyglot attachments, header spoofing, and base64 payload staging. Proposed a meta-ensemble detection layer resistant to these techniques.",
+    impact: "Findings contributed to an updated threat intelligence ruleset adopted in C-DAC's security operations. Research documented as internal technical report.",
+    stack: ["Python", "SMTP Forensics", "Regex", "ML Classifiers", "OSINT"],
   },
   {
     title: "Plant Leaf Disease Detection",
-    tag: "AgriAI",
+    tag: "Agricultural AI",
     org: "IIT Mandi",
-    icon: <Leaf size={20} />,
-    color: "#22c55e",
-    challenge: "Deploying computer vision in rural agricultural settings means operating with limited compute, poor lighting, and low-resolution cameras on mobile devices.",
-    solution: "Fine-tuned a lightweight MobileNetV3 backbone with knowledge distillation from a larger ResNet teacher model. Applied aggressive data augmentation and color jitter to handle field-condition variability.",
-    impact: "Achieved 94.2% accuracy on PlantVillage dataset with a model footprint small enough to run on-device without internet connectivity.",
-    stack: ["PyTorch", "MobileNetV3", "Knowledge Distillation", "OpenCV", "Flask"],
+    icon: <Leaf size={18}/>,
+    challenge: "Deploying computer vision in rural agricultural settings demands operation under limited compute, inconsistent lighting, low-resolution cameras, and without internet connectivity.",
+    solution: "Fine-tuned a lightweight MobileNetV3 backbone using knowledge distillation from a ResNet-50 teacher model. Applied aggressive augmentation (color jitter, random crop, grid distortion) to handle field-condition variability. Exported to TensorFlow Lite for on-device inference.",
+    impact: "94.2% accuracy on the PlantVillage dataset. Model footprint small enough to run entirely on-device — suitable for offline rural deployment.",
+    stack: ["PyTorch", "MobileNetV3", "Knowledge Distillation", "TFLite", "Flask"],
   },
 ];
 
 const ACHIEVEMENTS = [
-  { icon: <Award size={18} />, title: "GATE Qualified", sub: "CS & DA Streams — National rank", color: "#f59e0b" },
-  { icon: <FlaskConical size={18} />, title: "IIT Mandi Research Intern", sub: "Competitive national selection", color: "#06b6d4" },
-  { icon: <Globe size={18} />, title: "IELTS Band 7.0", sub: "C1 English Proficiency", color: "#22c55e" },
-  { icon: <Star size={18} />, title: "Stanford ML Specialization", sub: "DeepLearning.AI — Coursera", color: "#a855f7" },
-  { icon: <Briefcase size={18} />, title: "International Research Fellowship", sub: "Thapar × University of Queensland", color: "#f43f5e" },
-  { icon: <BookOpen size={18} />, title: "University of Seville Collaboration", sub: "Cross-continental medical AI research", color: "#ec4899" },
+  { icon: <Award size={16}/>,        title: "GATE Qualified",                    sub: "CS & DA Streams — National competitive examination" },
+  { icon: <FlaskConical size={16}/>, title: "IIT Mandi Research Intern",          sub: "Competitive national selection for research role" },
+  { icon: <Globe size={16}/>,        title: "IELTS Band 7.0",                    sub: "C1 English Proficiency — International standard" },
+  { icon: <Star size={16}/>,         title: "Stanford ML Specialization",         sub: "DeepLearning.AI — Coursera (Andrew Ng)" },
+  { icon: <Briefcase size={16}/>,    title: "International Research Fellowship",  sub: "Thapar Institute × University of Queensland" },
+  { icon: <BookOpen size={16}/>,     title: "University of Seville Collaboration",sub: "Cross-continental medical imaging AI research" },
 ];
 
 // ─── HELPERS ─────────────────────────────────────────────────────────────────
 
-function useTypewriter(words, speed = 80, pause = 2000) {
+function useTypewriter(words, speed = 75, pause = 2200) {
   const [display, setDisplay] = useState("");
-  const [wordIdx, setWordIdx] = useState(0);
-  const [charIdx, setCharIdx] = useState(0);
-  const [deleting, setDeleting] = useState(false);
-
+  const [wi, setWi] = useState(0);
+  const [ci, setCi] = useState(0);
+  const [del, setDel] = useState(false);
   useEffect(() => {
-    const word = words[wordIdx];
-    let timeout;
-    if (!deleting && charIdx <= word.length) {
-      timeout = setTimeout(() => { setDisplay(word.slice(0, charIdx)); setCharIdx(c => c + 1); }, speed);
-    } else if (!deleting && charIdx > word.length) {
-      timeout = setTimeout(() => setDeleting(true), pause);
-    } else if (deleting && charIdx >= 0) {
-      timeout = setTimeout(() => { setDisplay(word.slice(0, charIdx)); setCharIdx(c => c - 1); }, speed / 2);
-    } else {
-      setDeleting(false);
-      setWordIdx(i => (i + 1) % words.length);
-    }
-    return () => clearTimeout(timeout);
-  }, [charIdx, deleting, wordIdx, words, speed, pause]);
-
+    const w = words[wi];
+    let t;
+    if (!del && ci <= w.length)     t = setTimeout(() => { setDisplay(w.slice(0,ci)); setCi(c=>c+1); }, speed);
+    else if (!del && ci > w.length) t = setTimeout(() => setDel(true), pause);
+    else if (del && ci >= 0)        t = setTimeout(() => { setDisplay(w.slice(0,ci)); setCi(c=>c-1); }, speed/2);
+    else { setDel(false); setWi(i=>(i+1)%words.length); }
+    return () => clearTimeout(t);
+  }, [ci, del, wi, words, speed, pause]);
   return display;
-}
-
-// ─── COMPONENTS ──────────────────────────────────────────────────────────────
-
-function GlassCard({ children, className = "", glow = false, style = {} }) {
-  return (
-    <div
-      className={`relative rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl ${glow ? "shadow-[0_0_40px_rgba(6,182,212,0.08)]" : "shadow-lg"} ${className}`}
-      style={style}
-    >
-      {children}
-    </div>
-  );
-}
-
-function SectionTitle({ label, title, sub }) {
-  return (
-    <div className="mb-14 text-center">
-      <span className="inline-block mb-3 px-4 py-1.5 rounded-full border border-cyan-400/30 bg-cyan-400/10 text-cyan-300 text-xs font-semibold tracking-[0.2em] uppercase">
-        {label}
-      </span>
-      <h2 className="text-4xl md:text-5xl font-extrabold text-white mb-3 leading-tight" style={{ fontFamily: "'DM Serif Display', serif" }}>
-        {title}
-      </h2>
-      {sub && <p className="text-white/50 text-base max-w-xl mx-auto">{sub}</p>}
-    </div>
-  );
 }
 
 function FadeIn({ children, delay = 0, className = "" }) {
   const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-80px" });
+  const inView = useInView(ref, { once: true, margin: "-60px" });
   return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 30 }}
+    <motion.div ref={ref} initial={{ opacity: 0, y: 24 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.7, delay, ease: [0.22, 1, 0.36, 1] }}
-      className={className}
-    >
+      transition={{ duration: 0.8, delay, ease: [0.22, 1, 0.36, 1] }}
+      className={className}>
       {children}
     </motion.div>
+  );
+}
+
+function Divider() {
+  return (
+    <div className="max-w-7xl mx-auto px-6">
+      <div className="h-px" style={{ background: `linear-gradient(90deg, transparent, ${C.border}, transparent)` }} />
+    </div>
+  );
+}
+
+function SectionTitle({ eyebrow, title, sub }) {
+  return (
+    <div className="mb-14">
+      <div className="flex items-center gap-3 mb-4">
+        <div className="h-px w-8" style={{ background: C.gold }} />
+        <span className="text-xs font-semibold tracking-[0.25em] uppercase" style={{ color: C.gold, fontFamily: "monospace" }}>
+          {eyebrow}
+        </span>
+      </div>
+      <h2 className="text-4xl md:text-5xl font-bold mb-4 leading-tight" style={{ color: C.white, fontFamily: "Georgia, 'Times New Roman', serif" }}>
+        {title}
+      </h2>
+      {sub && <p className="text-base max-w-xl leading-relaxed" style={{ color: C.whiteD }}>{sub}</p>}
+    </div>
   );
 }
 
@@ -218,46 +218,67 @@ function Navbar() {
   const [copied, setCopied] = useState(false);
   const [open, setOpen] = useState(false);
   const { scrollY } = useScroll();
-  const bg = useTransform(scrollY, [0, 80], ["rgba(3,7,18,0)", "rgba(3,7,18,0.85)"]);
+  const bdr = useTransform(scrollY, [0, 80], [0, 1]);
 
-  const copyEmail = () => {
+  const copy = () => {
     navigator.clipboard.writeText("nikhilsahotra836@gmail.com");
     setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+    setTimeout(() => setCopied(false), 2200);
   };
 
   return (
-    <motion.nav style={{ background: bg }} className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md border-b border-white/5">
+    <motion.nav className="fixed top-0 left-0 right-0 z-50" style={{ background: C.bg0 }}>
+      <motion.div className="absolute bottom-0 left-0 right-0 h-px" style={{ background: C.border, opacity: bdr }} />
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-        <span className="text-white font-bold text-lg tracking-wide" style={{ fontFamily: "'DM Serif Display', serif" }}>
-          N<span className="text-cyan-400">.</span>Sahotra
-        </span>
+        <div className="flex items-center gap-3">
+          <div className="w-7 h-7 rounded flex items-center justify-center border"
+            style={{ borderColor: C.gold, background: `${C.gold}15` }}>
+            <span className="text-[10px] font-bold" style={{ color: C.gold, fontFamily: "monospace" }}>NS</span>
+          </div>
+          <span className="text-sm font-bold tracking-wide" style={{ color: C.white, fontFamily: "Georgia, serif" }}>
+            Nikhil Sahotra
+          </span>
+        </div>
+
         <div className="hidden md:flex items-center gap-8">
-          {NAV_LINKS.map(l => (
-            <a key={l} href={`#${l.toLowerCase()}`} className="text-white/60 hover:text-cyan-300 text-sm font-medium transition-colors duration-200">
+          {NAV.map(l => (
+            <a key={l} href={`#${l.toLowerCase()}`}
+              className="text-[11px] font-medium tracking-widest uppercase transition-colors duration-200"
+              style={{ color: C.silver, fontFamily: "monospace" }}
+              onMouseEnter={e => e.target.style.color = C.goldL}
+              onMouseLeave={e => e.target.style.color = C.silver}>
               {l}
             </a>
           ))}
         </div>
-        <div className="hidden md:flex items-center gap-3">
-          <button onClick={copyEmail} className="flex items-center gap-2 px-4 py-2 rounded-full bg-cyan-400/10 border border-cyan-400/30 text-cyan-300 text-xs font-semibold hover:bg-cyan-400/20 transition-all">
-            {copied ? <Check size={13} /> : <Copy size={13} />}
-            {copied ? "Copied!" : "Copy Email"}
+
+        <div className="hidden md:block">
+          <button onClick={copy}
+            className="flex items-center gap-2 px-4 py-2 rounded text-[11px] font-semibold border transition-all duration-200"
+            style={{ borderColor: C.gold, color: C.gold, background: `${C.gold}10`, fontFamily: "monospace" }}
+            onMouseEnter={e => { e.currentTarget.style.background = `${C.gold}20`; }}
+            onMouseLeave={e => { e.currentTarget.style.background = `${C.gold}10`; }}>
+            {copied ? <Check size={11}/> : <Copy size={11}/>}
+            {copied ? "Copied" : "Copy Email"}
           </button>
         </div>
-        <button className="md:hidden text-white/60" onClick={() => setOpen(o => !o)}>
-          {open ? <X size={22} /> : <Menu size={22} />}
+
+        <button className="md:hidden" style={{ color: C.silver }} onClick={() => setOpen(o=>!o)}>
+          {open ? <X size={20}/> : <Menu size={20}/>}
         </button>
       </div>
+
       <AnimatePresence>
         {open && (
-          <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} exit={{ opacity: 0, height: 0 }} className="md:hidden bg-gray-950/95 border-t border-white/5">
-            <div className="px-6 py-4 flex flex-col gap-4">
-              {NAV_LINKS.map(l => (
-                <a key={l} href={`#${l.toLowerCase()}`} onClick={() => setOpen(false)} className="text-white/70 hover:text-cyan-300 text-sm font-medium">{l}</a>
+          <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} exit={{ opacity: 0, height: 0 }}
+            className="md:hidden border-t" style={{ background: C.bg0, borderColor: C.border }}>
+            <div className="px-6 py-5 flex flex-col gap-4">
+              {NAV.map(l => (
+                <a key={l} href={`#${l.toLowerCase()}`} onClick={() => setOpen(false)}
+                  className="text-[11px] uppercase tracking-widest" style={{ color: C.silver, fontFamily: "monospace" }}>{l}</a>
               ))}
-              <button onClick={copyEmail} className="flex items-center gap-2 text-cyan-300 text-xs font-semibold">
-                {copied ? <Check size={13} /> : <Copy size={13} />}{copied ? "Copied!" : "Copy Email"}
+              <button onClick={copy} className="flex items-center gap-2 text-[11px]" style={{ color: C.gold, fontFamily: "monospace" }}>
+                {copied ? <Check size={11}/> : <Copy size={11}/>} {copied ? "Copied" : "Copy Email"}
               </button>
             </div>
           </motion.div>
@@ -272,69 +293,116 @@ function Navbar() {
 function Hero() {
   const typed = useTypewriter(["Deepfake Detection", "Generative AI", "Computer Vision", "Signal Processing", "AI Explainability"]);
   const { scrollY } = useScroll();
-  const y = useTransform(scrollY, [0, 500], [0, 120]);
+  const opacity = useTransform(scrollY, [0, 400], [1, 0]);
+  const yAnim   = useTransform(scrollY, [0, 400], [0, 50]);
 
   return (
-    <section id="about" className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden px-6">
-      {/* Animated mesh background */}
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_20%_20%,rgba(6,182,212,0.12)_0%,transparent_60%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_80%_80%,rgba(168,85,247,0.10)_0%,transparent_60%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_50%,rgba(244,63,94,0.05)_0%,transparent_70%)]" />
-        {/* Grid */}
-        <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "linear-gradient(rgba(255,255,255,.3) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.3) 1px,transparent 1px)", backgroundSize: "60px 60px" }} />
+    <section id="about" className="relative min-h-screen flex flex-col justify-center px-6 overflow-hidden" style={{ background: C.bg0 }}>
+      {/* Background */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute inset-0 opacity-[0.025]"
+          style={{ backgroundImage: `linear-gradient(${C.silver} 1px,transparent 1px),linear-gradient(90deg,${C.silver} 1px,transparent 1px)`, backgroundSize: "80px 80px" }} />
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] opacity-[0.07]"
+          style={{ background: `radial-gradient(circle at top right, ${C.gold}, transparent 65%)` }} />
+        <div className="absolute bottom-0 left-0 w-80 h-80 opacity-[0.05]"
+          style={{ background: `radial-gradient(circle at bottom left, ${C.gold}, transparent 70%)` }} />
       </div>
 
-      {/* Floating orbs */}
-      <motion.div style={{ y }} className="absolute top-32 right-[12%] w-72 h-72 rounded-full bg-cyan-500/10 blur-3xl pointer-events-none" />
-      <motion.div style={{ y: useTransform(scrollY, [0, 500], [0, 60]) }} className="absolute bottom-32 left-[8%] w-56 h-56 rounded-full bg-purple-500/10 blur-3xl pointer-events-none" />
+      <motion.div style={{ opacity, y: yAnim }} className="max-w-7xl mx-auto w-full pt-20">
+        <div className="grid md:grid-cols-5 gap-12 items-center">
 
-      <div className="max-w-4xl w-full text-center">
-        <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}>
-          {/* Badge */}
-          <div className="inline-flex items-center gap-2 mb-8 px-5 py-2 rounded-full border border-cyan-400/30 bg-cyan-400/5 backdrop-blur-sm">
-            <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
-            <span className="text-cyan-300 text-xs font-semibold tracking-widest uppercase">Junior Research Fellow · Thapar × UQ</span>
+          {/* Left — 3 cols */}
+          <div className="md:col-span-3">
+            <motion.div initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 1, ease: [0.22,1,0.36,1] }}>
+
+              <div className="inline-flex items-center gap-2.5 mb-10 px-4 py-2 rounded border"
+                style={{ borderColor: C.border, background: C.bg2 }}>
+                <div className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: C.gold }} />
+                <span className="text-[11px] font-medium tracking-widest uppercase" style={{ color: C.silver, fontFamily: "monospace" }}>
+                  Junior Research Fellow · Thapar × UQ
+                </span>
+              </div>
+
+              <h1 style={{ fontFamily: "Georgia, 'Times New Roman', serif", color: C.white }} className="leading-none mb-2">
+                <span className="block text-6xl md:text-7xl lg:text-[88px] font-bold">Nikhil</span>
+                <span className="block text-6xl md:text-7xl lg:text-[88px] font-bold" style={{ color: C.gold }}>Sahotra</span>
+              </h1>
+
+              <div className="mt-8 mb-8 flex items-center gap-3">
+                <div className="h-px w-8" style={{ background: C.dim }} />
+                <span className="text-sm" style={{ color: C.whiteD, fontFamily: "monospace" }}>
+                  <span style={{ color: C.dim }}>→ </span>
+                  <span style={{ color: C.goldL }}>{typed}</span>
+                  <span className="animate-pulse" style={{ color: C.gold }}>_</span>
+                </span>
+              </div>
+
+              <p className="text-base leading-8 mb-10 max-w-lg" style={{ color: C.whiteD }}>
+                AI researcher building explainable deepfake detection systems for social media. Working at the intersection
+                of signal processing, generative models, and digital forensics — in collaboration with the University of Queensland.
+              </p>
+
+              <div className="flex flex-wrap gap-3">
+                <a href="#research"
+                  className="px-7 py-3 rounded text-sm font-semibold transition-all duration-200 border"
+                  style={{ background: C.gold, borderColor: C.gold, color: C.bg0, fontFamily: "monospace" }}
+                  onMouseEnter={e => { e.currentTarget.style.background = C.goldL; e.currentTarget.style.borderColor = C.goldL; }}
+                  onMouseLeave={e => { e.currentTarget.style.background = C.gold; e.currentTarget.style.borderColor = C.gold; }}>
+                  View Research
+                </a>
+                <a href="#contact"
+                  className="px-7 py-3 rounded text-sm font-semibold transition-all duration-200 border"
+                  style={{ borderColor: C.border, color: C.whiteD, background: "transparent", fontFamily: "monospace" }}
+                  onMouseEnter={e => { e.currentTarget.style.borderColor = C.gold; e.currentTarget.style.color = C.gold; }}
+                  onMouseLeave={e => { e.currentTarget.style.borderColor = C.border; e.currentTarget.style.color = C.whiteD; }}>
+                  Get in Touch
+                </a>
+                <a href="https://linkedin.com/in/" target="_blank" rel="noreferrer"
+                  className="flex items-center gap-2 px-5 py-3 rounded text-sm border transition-all duration-200"
+                  style={{ borderColor: C.border, color: C.silver, background: "transparent", fontFamily: "monospace" }}
+                  onMouseEnter={e => { e.currentTarget.style.borderColor = C.borderH; e.currentTarget.style.color = C.whiteD; }}
+                  onMouseLeave={e => { e.currentTarget.style.borderColor = C.border; e.currentTarget.style.color = C.silver; }}>
+                  <Linkedin size={13}/> LinkedIn
+                </a>
+              </div>
+            </motion.div>
           </div>
 
-          <h1 className="text-6xl md:text-8xl font-black text-white leading-[0.95] mb-6" style={{ fontFamily: "'DM Serif Display', serif" }}>
-            Nikhil
-            <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-blue-400 to-purple-400">
-              Sahotra
-            </span>
-          </h1>
+          {/* Right — 2 cols */}
+          <motion.div className="md:col-span-2" initial={{ opacity: 0, x: 30 }} animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1, delay: 0.25, ease: [0.22,1,0.36,1] }}>
+            <div className="rounded-xl border p-7" style={{ background: C.bg2, borderColor: C.border }}>
+              <div className="text-[10px] font-bold uppercase tracking-widest mb-5 pb-4 border-b"
+                style={{ color: C.gold, borderColor: C.border, fontFamily: "monospace" }}>
+                Research Profile
+              </div>
+              {[
+                { label: "Institution",    val: "Thapar × Univ. of Queensland", icon: <Briefcase size={12}/> },
+                { label: "Focus Area",     val: "Deepfake Detection & Explainability", icon: <Eye size={12}/> },
+                { label: "Specialization", val: "GANs · CV · Signal Processing", icon: <Brain size={12}/> },
+                { label: "GATE",           val: "Qualified — CS & Data Analysis", icon: <Award size={12}/> },
+                { label: "IELTS",          val: "Band 7.0 (C1 English)", icon: <Globe size={12}/> },
+                { label: "Location",       val: "Patiala, India", icon: <MapPin size={12}/> },
+              ].map((row, i, arr) => (
+                <div key={i} className={`flex items-start gap-3 py-3 ${i < arr.length-1 ? "border-b" : ""}`}
+                  style={{ borderColor: C.border }}>
+                  <span style={{ color: C.dim, marginTop: 1 }}>{row.icon}</span>
+                  <div>
+                    <div className="text-[10px] uppercase tracking-widest mb-0.5" style={{ color: C.dim, fontFamily: "monospace" }}>{row.label}</div>
+                    <div className="text-xs font-medium" style={{ color: C.white }}>{row.val}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+      </motion.div>
 
-          <div className="text-xl md:text-2xl text-white/60 font-light mb-10 h-8">
-            <span className="text-white/40">Specializing in </span>
-            <span className="text-cyan-300 font-semibold">{typed}</span>
-            <span className="animate-pulse text-cyan-300">|</span>
-          </div>
-
-          <p className="text-white/50 text-base md:text-lg max-w-2xl mx-auto leading-relaxed mb-12">
-            AI researcher building explainable deepfake detection systems for social media. Working at the intersection of signal processing, generative models, and digital forensics.
-          </p>
-
-          <div className="flex flex-wrap items-center justify-center gap-4">
-            <a href="#research" className="px-8 py-3.5 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white text-sm font-semibold hover:shadow-[0_0_30px_rgba(6,182,212,0.4)] transition-all duration-300 hover:scale-105">
-              View Research
-            </a>
-            <a href="#contact" className="px-8 py-3.5 rounded-full border border-white/20 bg-white/5 text-white/80 text-sm font-semibold hover:bg-white/10 hover:border-white/30 transition-all duration-300">
-              Get in Touch
-            </a>
-            <a href="https://linkedin.com/in/" target="_blank" rel="noreferrer" className="flex items-center gap-2 px-5 py-3.5 rounded-full border border-white/10 bg-white/5 text-white/60 text-sm hover:text-cyan-300 hover:border-cyan-400/30 transition-all">
-              <Linkedin size={15} /> LinkedIn
-            </a>
-          </div>
-        </motion.div>
-      </div>
-
-      <motion.div
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 text-white/30"
-        animate={{ y: [0, 8, 0] }}
-        transition={{ repeat: Infinity, duration: 2 }}
-      >
-        <ChevronDown size={22} />
+      <motion.div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5"
+        animate={{ y: [0, 6, 0] }} transition={{ repeat: Infinity, duration: 2.5 }}>
+        <span className="text-[9px] uppercase tracking-widest" style={{ color: C.dim, fontFamily: "monospace" }}>Scroll</span>
+        <ChevronDown size={13} style={{ color: C.dim }} />
       </motion.div>
     </section>
   );
@@ -343,132 +411,142 @@ function Hero() {
 // ─── TIMELINE ────────────────────────────────────────────────────────────────
 
 function Timeline() {
-  const typeColor = { edu: "#06b6d4", work: "#a855f7", award: "#f59e0b" };
+  const dotColor = { edu: C.silver, work: C.gold, award: C.goldL, current: C.gold };
 
   return (
-    <section id="timeline" className="py-28 px-6">
-      <div className="max-w-4xl mx-auto">
+    <section id="timeline" className="py-28 px-6" style={{ background: C.bg1 }}>
+      <div className="max-w-7xl mx-auto">
         <FadeIn>
-          <SectionTitle label="Journey" title="My Path" sub="From campus labs to international research collaborations" />
+          <SectionTitle eyebrow="Career Journey" title="Timeline"
+            sub="A progression from foundational study to funded international research collaboration." />
         </FadeIn>
+
         <div className="relative">
-          {/* Vertical line */}
-          <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-cyan-400/50 via-purple-400/30 to-transparent" />
+          {/* Centre spine */}
+          <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-px"
+            style={{ background: `linear-gradient(to bottom, ${C.gold}80, ${C.border} 80%, transparent)` }} />
 
-          {TIMELINE.map((item, i) => {
-            const isRight = i % 2 === 0;
-            return (
-              <FadeIn key={i} delay={i * 0.08}>
-                <div className={`relative flex items-start gap-6 mb-10 md:mb-12 ${isRight ? "md:flex-row" : "md:flex-row-reverse"} flex-row`}>
-                  {/* Dot */}
-                  <div className="absolute left-6 md:left-1/2 -translate-x-1/2 top-4 z-10">
-                    <div className="w-3 h-3 rounded-full border-2 border-current" style={{ color: typeColor[item.type], backgroundColor: item.current ? typeColor[item.type] : "transparent" }} />
-                  </div>
+          <div className="space-y-5">
+            {TIMELINE.map((item, i) => {
+              const isLeft = i % 2 === 0;
+              return (
+                <FadeIn key={i} delay={i * 0.07}>
+                  <div className={`md:flex md:items-start relative gap-8 ${isLeft ? "" : "md:flex-row-reverse"}`}>
+                    {/* Dot */}
+                    <div className="hidden md:block absolute left-1/2 -translate-x-1/2 top-6 z-10 w-2.5 h-2.5 rounded-full border-2"
+                      style={{ borderColor: dotColor[item.type], background: item.current ? dotColor[item.type] : C.bg0 }} />
 
-                  {/* Card — push left/right on desktop */}
-                  <div className={`ml-14 md:ml-0 w-full md:w-[46%] ${isRight ? "md:mr-auto md:pr-8" : "md:ml-auto md:pl-8"}`}>
-                    <GlassCard className="p-5" glow={item.current}>
-                      {item.current && (
-                        <div className="inline-flex items-center gap-1.5 mb-3 px-2.5 py-1 rounded-full bg-cyan-400/15 border border-cyan-400/30 text-cyan-300 text-[10px] font-bold tracking-widest uppercase">
-                          <span className="w-1 h-1 rounded-full bg-cyan-400 animate-pulse" />
-                          Current
+                    <div className={`md:w-[46%] ${isLeft ? "md:ml-auto md:pr-8" : "md:mr-auto md:pl-8"}`}>
+                      <div className="rounded-xl border p-6 transition-all duration-300"
+                        style={{ background: item.current ? `${C.gold}07` : C.bg2, borderColor: item.current ? `${C.gold}60` : C.border }}>
+                        {item.current && (
+                          <div className="inline-flex items-center gap-1.5 mb-3 px-2.5 py-1 rounded-sm text-[10px] font-bold uppercase tracking-widest"
+                            style={{ background: `${C.gold}20`, color: C.gold, fontFamily: "monospace" }}>
+                            <span className="w-1 h-1 rounded-full animate-pulse" style={{ background: C.gold }} />
+                            Active
+                          </div>
+                        )}
+                        <div className="flex items-center gap-2 mb-2">
+                          <Calendar size={10} style={{ color: C.dim }} />
+                          <span className="text-[10px] uppercase tracking-widest font-semibold"
+                            style={{ color: item.current ? C.gold : C.silver, fontFamily: "monospace" }}>
+                            {item.year}
+                          </span>
                         </div>
-                      )}
-                      <div className="flex items-center gap-2 mb-1">
-                        <span style={{ color: typeColor[item.type] }}>{item.icon}</span>
-                        <span className="text-[11px] font-bold tracking-widest uppercase" style={{ color: typeColor[item.type] }}>{item.year}</span>
+                        <h3 className="font-bold text-base mb-1" style={{ color: C.white, fontFamily: "Georgia, serif" }}>{item.role}</h3>
+                        <div className="flex items-center gap-2 mb-3">
+                          <span className="text-xs font-medium" style={{ color: C.gold }}>{item.org}</span>
+                          <span style={{ color: C.dim }} className="text-xs">·</span>
+                          <span className="text-xs" style={{ color: C.dim }}>{item.loc}</span>
+                        </div>
+                        <p className="text-sm leading-relaxed" style={{ color: C.whiteD }}>{item.detail}</p>
                       </div>
-                      <h3 className="text-white font-bold text-base mb-0.5">{item.role}</h3>
-                      <p className="text-white/40 text-xs font-medium mb-2">{item.org}</p>
-                      <p className="text-white/55 text-sm leading-relaxed">{item.detail}</p>
-                    </GlassCard>
+                    </div>
                   </div>
-                </div>
-              </FadeIn>
-            );
-          })}
+                </FadeIn>
+              );
+            })}
+          </div>
         </div>
       </div>
     </section>
   );
 }
 
-// ─── RESEARCH DEEP-DIVE ──────────────────────────────────────────────────────
+// ─── RESEARCH ────────────────────────────────────────────────────────────────
 
-function ProjectCard({ project, index }) {
-  const [expanded, setExpanded] = useState(false);
+function ProjectCard({ p, idx }) {
+  const [open, setOpen] = useState(false);
   const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-60px" });
+  const inView = useInView(ref, { once: true, margin: "-50px" });
 
   return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, y: 40 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.7, delay: index * 0.12, ease: [0.22, 1, 0.36, 1] }}
-    >
-      <GlassCard className="p-6 md:p-8 cursor-pointer group hover:border-white/20 transition-all duration-300" glow>
-        <div className="flex items-start justify-between gap-4 mb-5">
-          <div className="flex items-start gap-4">
-            <div className="p-3 rounded-xl flex-shrink-0" style={{ background: `${project.color}18`, border: `1px solid ${project.color}30` }}>
-              <span style={{ color: project.color }}>{project.icon}</span>
-            </div>
-            <div>
-              <span className="text-[10px] font-bold tracking-widest uppercase px-2.5 py-1 rounded-full mb-2 inline-block" style={{ background: `${project.color}15`, color: project.color }}>
-                {project.tag}
-              </span>
-              <h3 className="text-white font-bold text-xl leading-tight">{project.title}</h3>
-              <p className="text-white/40 text-xs mt-0.5">{project.org}</p>
-            </div>
-          </div>
-          <button
-            onClick={() => setExpanded(e => !e)}
-            className="flex-shrink-0 p-2 rounded-full border border-white/10 hover:border-white/20 transition-all text-white/40 hover:text-white mt-1"
-          >
-            <motion.div animate={{ rotate: expanded ? 180 : 0 }} transition={{ duration: 0.3 }}>
-              <ChevronDown size={16} />
-            </motion.div>
-          </button>
-        </div>
+    <motion.div ref={ref} initial={{ opacity: 0, y: 28 }} animate={inView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.7, delay: idx * 0.1, ease: [0.22,1,0.36,1] }}>
+      <div className="rounded-xl border overflow-hidden transition-all duration-300"
+        style={{ background: C.bg2, borderColor: open ? `${C.gold}60` : C.border }}>
 
-        {/* Always visible: challenge */}
-        <div className="mb-4">
-          <div className="flex items-center gap-2 mb-2">
-            <div className="w-1.5 h-1.5 rounded-full bg-red-400" />
-            <span className="text-red-300 text-xs font-bold uppercase tracking-wider">Challenge</span>
+        <div className="p-6 md:p-8">
+          <div className="flex items-start justify-between gap-4 mb-6">
+            <div className="flex items-start gap-4">
+              <div className="w-10 h-10 rounded border flex items-center justify-center flex-shrink-0"
+                style={{ background: `${C.gold}10`, borderColor: `${C.gold}30` }}>
+                <span style={{ color: C.gold }}>{p.icon}</span>
+              </div>
+              <div>
+                <div className="text-[10px] font-bold uppercase tracking-widest mb-2 px-2 py-0.5 rounded-sm inline-block"
+                  style={{ background: `${C.gold}12`, color: C.gold, fontFamily: "monospace" }}>
+                  {p.tag}
+                </div>
+                <h3 className="font-bold text-lg leading-tight" style={{ color: C.white, fontFamily: "Georgia, serif" }}>{p.title}</h3>
+                <p className="text-xs mt-0.5" style={{ color: C.silver }}>{p.org}</p>
+              </div>
+            </div>
+            <button onClick={() => setOpen(o=>!o)}
+              className="w-8 h-8 rounded border flex items-center justify-center flex-shrink-0 transition-all duration-200"
+              style={{ borderColor: open ? C.gold : C.border, color: open ? C.gold : C.dim, background: open ? `${C.gold}10` : "transparent" }}>
+              <motion.span animate={{ rotate: open ? 180 : 0 }} transition={{ duration: 0.3 }}>
+                <ChevronDown size={13} />
+              </motion.span>
+            </button>
           </div>
-          <p className="text-white/60 text-sm leading-relaxed">{project.challenge}</p>
+
+          {/* Challenge — always visible */}
+          <div className="rounded-lg p-4" style={{ background: C.bg0, border: `1px solid ${C.border}` }}>
+            <div className="text-[10px] font-bold uppercase tracking-widest mb-2" style={{ color: C.silver, fontFamily: "monospace" }}>
+              // Challenge
+            </div>
+            <p className="text-sm leading-relaxed" style={{ color: C.whiteD }}>{p.challenge}</p>
+          </div>
         </div>
 
         <AnimatePresence>
-          {expanded && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-              className="overflow-hidden"
-            >
-              <div className="pt-2 border-t border-white/5 space-y-4">
-                <div>
-                  <div className="flex items-center gap-2 mb-2">
-                    <div className="w-1.5 h-1.5 rounded-full bg-green-400" />
-                    <span className="text-green-300 text-xs font-bold uppercase tracking-wider">Technical Solution</span>
+          {open && (
+            <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.4, ease: [0.22,1,0.36,1] }} className="overflow-hidden">
+              <div className="px-6 md:px-8 pb-6 md:pb-8 space-y-3 border-t pt-4" style={{ borderColor: C.border }}>
+                <div className="rounded-lg p-4" style={{ background: C.bg0, border: `1px solid ${C.border}` }}>
+                  <div className="text-[10px] font-bold uppercase tracking-widest mb-2" style={{ color: C.gold, fontFamily: "monospace" }}>
+                    // Technical Solution
                   </div>
-                  <p className="text-white/60 text-sm leading-relaxed">{project.solution}</p>
+                  <p className="text-sm leading-relaxed" style={{ color: C.whiteD }}>{p.solution}</p>
+                </div>
+                <div className="rounded-lg p-4" style={{ background: C.bg0, border: `1px solid ${C.border}` }}>
+                  <div className="text-[10px] font-bold uppercase tracking-widest mb-2" style={{ color: C.goldL, fontFamily: "monospace" }}>
+                    // Impact & Outcomes
+                  </div>
+                  <p className="text-sm leading-relaxed" style={{ color: C.whiteD }}>{p.impact}</p>
                 </div>
                 <div>
-                  <div className="flex items-center gap-2 mb-2">
-                    <div className="w-1.5 h-1.5 rounded-full" style={{ background: project.color }} />
-                    <span className="text-xs font-bold uppercase tracking-wider" style={{ color: project.color }}>Impact</span>
+                  <div className="text-[10px] font-bold uppercase tracking-widest mb-3" style={{ color: C.dim, fontFamily: "monospace" }}>
+                    Technology Stack
                   </div>
-                  <p className="text-white/60 text-sm leading-relaxed">{project.impact}</p>
-                </div>
-                <div>
-                  <p className="text-white/30 text-xs font-bold uppercase tracking-wider mb-2">Stack</p>
                   <div className="flex flex-wrap gap-2">
-                    {project.stack.map(s => (
-                      <span key={s} className="px-2.5 py-1 rounded-full text-[11px] font-medium border border-white/10 text-white/50 bg-white/5">{s}</span>
+                    {p.stack.map(s => (
+                      <span key={s} className="px-2.5 py-1 rounded-sm text-[11px] font-medium border"
+                        style={{ borderColor: C.border, color: C.silver, background: C.bg3, fontFamily: "monospace" }}>
+                        {s}
+                      </span>
                     ))}
                   </div>
                 </div>
@@ -477,88 +555,74 @@ function ProjectCard({ project, index }) {
           )}
         </AnimatePresence>
 
-        <div className="mt-4 pt-4 border-t border-white/5">
-          <button onClick={() => setExpanded(e => !e)} className="text-xs font-semibold flex items-center gap-1.5 transition-colors" style={{ color: project.color }}>
-            <ArrowRight size={12} />
-            {expanded ? "Hide Details" : "Technical Deep-Dive"}
-          </button>
-        </div>
-      </GlassCard>
+        <button onClick={() => setOpen(o=>!o)}
+          className="w-full px-6 md:px-8 py-3 flex items-center gap-2 border-t text-[11px] font-semibold transition-colors duration-200"
+          style={{ borderColor: C.border, color: open ? C.gold : C.silver, fontFamily: "monospace",
+            background: open ? `${C.gold}05` : C.bg3 }}>
+          <ArrowRight size={11} />
+          {open ? "Collapse Details" : "Technical Deep-Dive →"}
+        </button>
+      </div>
     </motion.div>
   );
 }
 
 function Research() {
   return (
-    <section id="research" className="py-28 px-6">
-      <div className="max-w-5xl mx-auto">
+    <section id="research" className="py-28 px-6" style={{ background: C.bg0 }}>
+      <div className="max-w-7xl mx-auto">
         <FadeIn>
-          <SectionTitle label="Technical Challenges & Solutions" title="Research Work" sub="Click any card to explore the full technical breakdown" />
+          <SectionTitle eyebrow="Technical Challenges & Solutions" title="Research Work"
+            sub="Expand each project to explore the full technical methodology, solution architecture, and research outcomes." />
         </FadeIn>
-        <div className="grid md:grid-cols-2 gap-6">
-          {PROJECTS.map((p, i) => <ProjectCard key={i} project={p} index={i} />)}
+        <div className="grid md:grid-cols-2 gap-5">
+          {PROJECTS.map((p,i) => <ProjectCard key={i} p={p} idx={i} />)}
         </div>
       </div>
     </section>
   );
 }
 
-// ─── SKILL CLOUD ─────────────────────────────────────────────────────────────
+// ─── SKILLS ──────────────────────────────────────────────────────────────────
 
 function Skills() {
-  const [hovered, setHovered] = useState(null);
-
   return (
-    <section id="skills" className="py-28 px-6">
-      <div className="max-w-5xl mx-auto">
+    <section id="skills" className="py-28 px-6" style={{ background: C.bg1 }}>
+      <div className="max-w-7xl mx-auto">
         <FadeIn>
-          <SectionTitle label="Skill Cloud" title="Technologies" sub="Click any skill to view the associated certification" />
+          <SectionTitle eyebrow="Technical Expertise" title="Skill Cloud"
+            sub="Click any skill tile to open its associated certification. Proficiency reflects hands-on research and project work." />
         </FadeIn>
-        <FadeIn delay={0.1}>
+        <FadeIn delay={0.08}>
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-            {SKILLS.map((skill, i) => (
-              <motion.a
-                key={skill.name}
-                href={skill.cert}
-                target="_blank"
-                rel="noreferrer"
-                onMouseEnter={() => setHovered(i)}
-                onMouseLeave={() => setHovered(null)}
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.05, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-                whileHover={{ y: -4, scale: 1.04 }}
-                className="relative group block rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl p-5 cursor-pointer transition-all duration-300 overflow-hidden"
-                style={{
-                  borderColor: hovered === i ? `${skill.color}50` : undefined,
-                  boxShadow: hovered === i ? `0 0 30px ${skill.color}18` : undefined,
-                }}
-              >
-                <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl" style={{ background: `radial-gradient(circle at 50% 0%, ${skill.color}12, transparent 70%)` }} />
+            {SKILLS.map((sk, i) => (
+              <motion.a key={sk.name} href={sk.cert} target="_blank" rel="noreferrer"
+                initial={{ opacity: 0, y: 18 }} whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }} transition={{ delay: i*0.04, duration: 0.6, ease: [0.22,1,0.36,1] }}
+                whileHover={{ y: -2 }}
+                className="group block rounded-xl border p-5 transition-all duration-300"
+                style={{ background: C.bg2, borderColor: C.border }}
+                onMouseEnter={e => { e.currentTarget.style.borderColor = `${C.gold}70`; e.currentTarget.style.background = `${C.gold}07`; }}
+                onMouseLeave={e => { e.currentTarget.style.borderColor = C.border; e.currentTarget.style.background = C.bg2; }}>
                 <div className="flex items-center justify-between mb-3">
-                  <span style={{ color: skill.color }}>{skill.icon}</span>
-                  <ExternalLink size={11} className="text-white/20 group-hover:text-white/50 transition-colors" />
+                  <span style={{ color: C.gold }}>{sk.icon}</span>
+                  <ExternalLink size={10} style={{ color: C.dim }} className="opacity-0 group-hover:opacity-100 transition-opacity" />
                 </div>
-                <p className="text-white font-semibold text-sm mb-3">{skill.name}</p>
-                {/* Progress bar */}
-                <div className="h-1 rounded-full bg-white/10 overflow-hidden">
-                  <motion.div
-                    initial={{ width: 0 }}
-                    whileInView={{ width: `${skill.level}%` }}
-                    viewport={{ once: true }}
-                    transition={{ delay: i * 0.05 + 0.3, duration: 1, ease: "easeOut" }}
-                    className="h-full rounded-full"
-                    style={{ background: skill.color }}
-                  />
+                <p className="text-sm font-semibold mb-3" style={{ color: C.white }}>{sk.name}</p>
+                <div className="h-0.5 rounded-full mb-1.5" style={{ background: C.border }}>
+                  <motion.div className="h-full rounded-full" style={{ background: C.gold }}
+                    initial={{ width: 0 }} whileInView={{ width: `${sk.pct}%` }}
+                    viewport={{ once: true }} transition={{ delay: i*0.04+0.3, duration: 1.2, ease: "easeOut" }} />
                 </div>
-                <p className="text-white/30 text-[10px] mt-1.5">{skill.level}%</p>
+                <p className="text-[10px]" style={{ color: C.dim, fontFamily: "monospace" }}>{sk.pct}%</p>
               </motion.a>
             ))}
           </div>
         </FadeIn>
         <FadeIn delay={0.2}>
-          <p className="text-center text-white/25 text-xs mt-6">↑ Click any skill to open its certification link (links to be updated)</p>
+          <p className="mt-5 text-[10px] text-center" style={{ color: C.dim, fontFamily: "monospace" }}>
+            Certification links are placeholders — update with your LinkedIn certificate URLs
+          </p>
         </FadeIn>
       </div>
     </section>
@@ -569,25 +633,28 @@ function Skills() {
 
 function Achievements() {
   return (
-    <section id="achievements" className="py-28 px-6">
-      <div className="max-w-5xl mx-auto">
+    <section id="achievements" className="py-28 px-6" style={{ background: C.bg0 }}>
+      <div className="max-w-7xl mx-auto">
         <FadeIn>
-          <SectionTitle label="Achievements" title="Recognition" sub="Milestones from a journey of rigorous academic and research excellence" />
+          <SectionTitle eyebrow="Recognition" title="Achievements"
+            sub="Academic distinctions, competitive qualifications, and international research milestones." />
         </FadeIn>
-        <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-5">
+        <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4">
           {ACHIEVEMENTS.map((a, i) => (
-            <FadeIn key={i} delay={i * 0.08}>
-              <GlassCard className="p-6 hover:border-white/20 transition-all duration-300 group">
-                <div className="flex items-start gap-4">
-                  <div className="p-2.5 rounded-xl flex-shrink-0 transition-all duration-300 group-hover:scale-110" style={{ background: `${a.color}18`, border: `1px solid ${a.color}30` }}>
-                    <span style={{ color: a.color }}>{a.icon}</span>
-                  </div>
-                  <div>
-                    <h4 className="text-white font-bold text-sm mb-1">{a.title}</h4>
-                    <p className="text-white/40 text-xs leading-relaxed">{a.sub}</p>
-                  </div>
+            <FadeIn key={i} delay={i*0.07}>
+              <div className="group rounded-xl border p-6 flex items-start gap-4 transition-all duration-300"
+                style={{ background: C.bg2, borderColor: C.border }}
+                onMouseEnter={e => { e.currentTarget.style.borderColor = `${C.gold}60`; e.currentTarget.style.background = `${C.gold}06`; }}
+                onMouseLeave={e => { e.currentTarget.style.borderColor = C.border; e.currentTarget.style.background = C.bg2; }}>
+                <div className="w-9 h-9 rounded border flex items-center justify-center flex-shrink-0"
+                  style={{ background: `${C.gold}12`, borderColor: `${C.gold}30` }}>
+                  <span style={{ color: C.gold }}>{a.icon}</span>
                 </div>
-              </GlassCard>
+                <div>
+                  <h4 className="text-sm font-bold mb-1" style={{ color: C.white }}>{a.title}</h4>
+                  <p className="text-xs leading-relaxed" style={{ color: C.silver }}>{a.sub}</p>
+                </div>
+              </div>
             </FadeIn>
           ))}
         </div>
@@ -601,57 +668,79 @@ function Achievements() {
 function Contact() {
   const [copied, setCopied] = useState(false);
   const email = "nikhilsahotra836@gmail.com";
-
-  const copyEmail = () => {
-    navigator.clipboard.writeText(email);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2500);
-  };
+  const copy = () => { navigator.clipboard.writeText(email); setCopied(true); setTimeout(() => setCopied(false), 2500); };
 
   return (
-    <section id="contact" className="py-28 px-6">
-      <div className="max-w-2xl mx-auto text-center">
+    <section id="contact" className="py-28 px-6" style={{ background: C.bg1 }}>
+      <div className="max-w-4xl mx-auto">
         <FadeIn>
-          <SectionTitle label="Contact" title="Let's Connect" sub="Open to research collaborations, internship opportunities, and interesting conversations in AI." />
+          <SectionTitle eyebrow="Get in Touch" title="Contact"
+            sub="Open to research collaborations, fellowship opportunities, and conversations in AI and machine learning." />
         </FadeIn>
         <FadeIn delay={0.1}>
-          <GlassCard className="p-10" glow>
-            <div className="flex items-center justify-center gap-3 mb-8">
-              <div className="p-3 rounded-full bg-cyan-400/10 border border-cyan-400/20">
-                <Mail size={20} className="text-cyan-300" />
+          <div className="grid md:grid-cols-2 gap-5">
+            {/* Email */}
+            <div className="rounded-xl border p-7" style={{ background: C.bg2, borderColor: C.border }}>
+              <div className="text-[10px] font-bold uppercase tracking-widest mb-5 pb-4 border-b"
+                style={{ color: C.gold, borderColor: C.border, fontFamily: "monospace" }}>
+                Direct Contact
               </div>
-              <span className="text-white/70 text-base font-mono">{email}</span>
+              <div className="flex items-center gap-3 mb-6">
+                <div className="w-9 h-9 rounded border flex items-center justify-center flex-shrink-0"
+                  style={{ background: `${C.gold}10`, borderColor: `${C.gold}30` }}>
+                  <Mail size={14} style={{ color: C.gold }} />
+                </div>
+                <div>
+                  <div className="text-[10px] uppercase tracking-widest mb-0.5" style={{ color: C.dim, fontFamily: "monospace" }}>Email</div>
+                  <span className="text-xs font-medium" style={{ color: C.white, fontFamily: "monospace" }}>{email}</span>
+                </div>
+              </div>
+              <button onClick={copy}
+                className="w-full flex items-center justify-center gap-2 py-3 rounded text-sm font-semibold border transition-all duration-200"
+                style={{ background: `${C.gold}12`, borderColor: C.gold, color: C.gold, fontFamily: "monospace" }}
+                onMouseEnter={e => { e.currentTarget.style.background = `${C.gold}22`; }}
+                onMouseLeave={e => { e.currentTarget.style.background = `${C.gold}12`; }}>
+                <AnimatePresence mode="wait">
+                  {copied
+                    ? <motion.span key="c" initial={{scale:0}} animate={{scale:1}} exit={{scale:0}} className="flex items-center gap-2"><Check size={13}/> Copied to Clipboard</motion.span>
+                    : <motion.span key="u" initial={{scale:0}} animate={{scale:1}} exit={{scale:0}} className="flex items-center gap-2"><Copy size={13}/> Copy Email Address</motion.span>
+                  }
+                </AnimatePresence>
+              </button>
             </div>
-            <button
-              onClick={copyEmail}
-              className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold text-sm hover:shadow-[0_0_40px_rgba(6,182,212,0.4)] transition-all duration-300 hover:scale-105 mb-8"
-            >
-              <AnimatePresence mode="wait">
-                {copied ? (
-                  <motion.span key="copied" initial={{ scale: 0 }} animate={{ scale: 1 }} exit={{ scale: 0 }} className="flex items-center gap-2">
-                    <Check size={16} /> Copied to Clipboard!
-                  </motion.span>
-                ) : (
-                  <motion.span key="copy" initial={{ scale: 0 }} animate={{ scale: 1 }} exit={{ scale: 0 }} className="flex items-center gap-2">
-                    <Copy size={16} /> Copy Email Address
-                  </motion.span>
-                )}
-              </AnimatePresence>
-            </button>
 
-            <div className="flex items-center justify-center gap-4">
-              {[
-                { icon: <Linkedin size={18} />, label: "LinkedIn", href: "https://linkedin.com/in/" },
-                { icon: <Github size={18} />, label: "GitHub", href: "https://github.com/" },
-                { icon: <BookOpen size={18} />, label: "Publications", href: "#placeholder-publications" },
-              ].map(l => (
-                <a key={l.label} href={l.href} target="_blank" rel="noreferrer"
-                  className="flex items-center gap-2 px-4 py-2.5 rounded-full border border-white/10 bg-white/5 text-white/50 text-xs font-medium hover:text-cyan-300 hover:border-cyan-400/30 hover:bg-cyan-400/5 transition-all">
-                  {l.icon} {l.label}
-                </a>
-              ))}
+            {/* Links */}
+            <div className="rounded-xl border p-7" style={{ background: C.bg2, borderColor: C.border }}>
+              <div className="text-[10px] font-bold uppercase tracking-widest mb-5 pb-4 border-b"
+                style={{ color: C.gold, borderColor: C.border, fontFamily: "monospace" }}>
+                Professional Profiles
+              </div>
+              <div className="space-y-2.5">
+                {[
+                  { icon: <Linkedin size={13}/>,    label: "LinkedIn",       sub: "Professional profile",    href: "https://linkedin.com/in/" },
+                  { icon: <Github size={13}/>,      label: "GitHub",         sub: "Code & repositories",     href: "https://github.com/" },
+                  { icon: <BookOpen size={13}/>,    label: "Publications",   sub: "Research papers",         href: "#placeholder-publications" },
+                  { icon: <TrendingUp size={13}/>,  label: "Google Scholar", sub: "Citation index",          href: "#placeholder-scholar" },
+                ].map(l => (
+                  <a key={l.label} href={l.href} target="_blank" rel="noreferrer"
+                    className="group flex items-center gap-3.5 p-3.5 rounded-lg border transition-all duration-200"
+                    style={{ background: C.bg3, borderColor: C.border }}
+                    onMouseEnter={e => { e.currentTarget.style.borderColor = `${C.gold}60`; }}
+                    onMouseLeave={e => { e.currentTarget.style.borderColor = C.border; }}>
+                    <div className="w-8 h-8 rounded border flex items-center justify-center flex-shrink-0"
+                      style={{ background: `${C.gold}10`, borderColor: `${C.gold}30` }}>
+                      <span style={{ color: C.gold }}>{l.icon}</span>
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="text-sm font-semibold" style={{ color: C.white }}>{l.label}</div>
+                      <div className="text-[10px]" style={{ color: C.dim }}>{l.sub}</div>
+                    </div>
+                    <ExternalLink size={10} style={{ color: C.dim }} className="flex-shrink-0" />
+                  </a>
+                ))}
+              </div>
             </div>
-          </GlassCard>
+          </div>
         </FadeIn>
       </div>
     </section>
@@ -662,9 +751,20 @@ function Contact() {
 
 function Footer() {
   return (
-    <footer className="border-t border-white/5 py-8 px-6 text-center text-white/20 text-xs">
-      <p>© 2025 Nikhil Sahotra · Junior Research Fellow · Deepfake Detection & AI</p>
-      <p className="mt-1 text-white/15">Built with React, Tailwind CSS & Framer Motion</p>
+    <footer className="border-t py-8 px-6" style={{ background: C.bg0, borderColor: C.border }}>
+      <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-3">
+        <div className="flex items-center gap-3">
+          <div className="w-6 h-6 rounded border flex items-center justify-center" style={{ borderColor: C.gold, background: `${C.gold}12` }}>
+            <span className="text-[9px] font-bold" style={{ color: C.gold, fontFamily: "monospace" }}>NS</span>
+          </div>
+          <span className="text-xs" style={{ color: C.dim, fontFamily: "monospace" }}>
+            Nikhil Sahotra · Junior Research Fellow · Deepfake Detection & AI
+          </span>
+        </div>
+        <p className="text-[10px]" style={{ color: C.dim, fontFamily: "monospace" }}>
+          © 2025 · React · Tailwind CSS · Framer Motion
+        </p>
+      </div>
     </footer>
   );
 }
@@ -673,21 +773,33 @@ function Footer() {
 
 export default function App() {
   useEffect(() => {
-    // Inject Google Fonts
-    const link = document.createElement("link");
-    link.rel = "stylesheet";
-    link.href = "https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&display=swap";
-    document.head.appendChild(link);
+    const style = document.createElement("style");
+    style.textContent = `
+      * { scrollbar-width: thin; scrollbar-color: #1e2535 #080a0d; box-sizing: border-box; }
+      ::-webkit-scrollbar { width: 5px; }
+      ::-webkit-scrollbar-track { background: #080a0d; }
+      ::-webkit-scrollbar-thumb { background: #1e2535; border-radius: 3px; }
+      ::-webkit-scrollbar-thumb:hover { background: #2a3347; }
+      html { scroll-behavior: smooth; }
+      ::selection { background: rgba(184,151,106,0.25); color: #d4b896; }
+      body { margin: 0; }
+    `;
+    document.head.appendChild(style);
   }, []);
 
   return (
-    <div className="min-h-screen bg-[#030712] text-white selection:bg-cyan-400/30 selection:text-cyan-100">
+    <div className="min-h-screen" style={{ background: "#080a0d", color: "#e8eaf0" }}>
       <Navbar />
       <Hero />
+      <Divider />
       <Timeline />
+      <Divider />
       <Research />
+      <Divider />
       <Skills />
+      <Divider />
       <Achievements />
+      <Divider />
       <Contact />
       <Footer />
     </div>
